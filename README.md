@@ -19,3 +19,5 @@ import the jar into your plugin using Maven:
 # Methods:
 ### Logger:
 Read more [here](./docs/logger.md) how it works!
+### HeadCreator:
+Read more [here](./docs/heads.md) how it works!
