@@ -3,7 +3,7 @@ Utils for MC plugins
 
 # How to use:
 build the jar using Maven:
-`maven install`
+`mvn install`
 this will add the jar to your local maven repo on your computer `~/.m2`
 
 import the jar into your plugin using Maven:
