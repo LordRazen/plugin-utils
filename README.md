@@ -21,3 +21,9 @@ import the jar into your plugin using Maven:
 Read more [here](./docs/logger.md) how it works!
 ### HeadCreator:
 Read more [here](./docs/heads.md) how it works!
+### Config Updater:
+Read more [here](./docs/config.md) how it works!
+### Inventory Creator:
+Read more [here](./docs/inventory.md) how it works!
+### Language Handler:
+Read more [here](./docs/language.md) how it works!
