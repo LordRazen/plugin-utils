@@ -29,6 +29,6 @@ public class LanguageHandler {
                 new File(plugin.getDataFolder(), "languages/" + lang + ".yml"));
 
         // Return the correct string
-        return " §r" + langFile.getString(section);
+        return langFile.getString(section);
     }
 }
