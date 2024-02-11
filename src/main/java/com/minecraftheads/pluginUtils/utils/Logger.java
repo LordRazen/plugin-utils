@@ -14,4 +14,18 @@ public class Logger {
             Bukkit.getLogger().info(msg);
         }
     }
+    public static void warning(String msg) {
+        if (pluginPrefix != null) {
+            Bukkit.getLogger().warning(pluginPrefix + " " + msg);
+        } else {
+            Bukkit.getLogger().warning(msg);
+        }
+    }
+    public static void severe(String msg) {
+        if (pluginPrefix != null) {
+            Bukkit.getLogger().severe(pluginPrefix + " " + msg);
+        } else {
+            Bukkit.getLogger().severe(msg);
+        }
+    }
 }
