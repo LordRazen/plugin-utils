@@ -1,12 +1,19 @@
 package com.minecraftheads.pluginUtils.heads;
 
+import com.minecraftheads.pluginUtils.utils.Logger;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.profile.PlayerProfile;
+import org.bukkit.profile.PlayerTextures;
 
 import java.lang.reflect.Field;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.UUID;
 
 public class HeadCreator {
@@ -14,29 +21,25 @@ public class HeadCreator {
     /**
      * Get a custom head based on the base64 data provided from Minecraft-Heads
      *
-     * @param base64 Base64 value to use
+     * @param textureURL Texture URL value to use
      * @return Created skull
      */
-    public static ItemStack getHead(String base64) {
+    public static ItemStack getHead(String textureURL) {
         ItemStack head = new ItemStack(Material.PLAYER_HEAD);
-        if (base64 == null || base64.isEmpty()) {
+        if (textureURL == null || textureURL.isEmpty()) {
             return head;
         }
-        ItemMeta headMeta = head.getItemMeta();
-        GameProfile profile = new GameProfile(UUID.randomUUID(), null);
-        profile.getProperties().put("textures", new Property("textures", base64));
-        Field profileField = null;
+        SkullMeta headMeta = (SkullMeta) head.getItemMeta();
+
+        PlayerProfile pp = Bukkit.createPlayerProfile(UUID.randomUUID());
+        PlayerTextures pt = pp.getTextures();
         try {
-            profileField = headMeta.getClass().getDeclaredField("profile");
-        } catch (NoSuchFieldException | SecurityException e) {
-            e.printStackTrace();
+            pt.setSkin(new URL(textureURL));
+        } catch (MalformedURLException e) {
+            Logger.severe(e.toString());
         }
-        profileField.setAccessible(true);
-        try {
-            profileField.set(headMeta, profile);
-        } catch (IllegalArgumentException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
+        pp.setTextures(pt);
+        headMeta.setOwnerProfile(pp);
         head.setItemMeta(headMeta);
         return head;
     }
